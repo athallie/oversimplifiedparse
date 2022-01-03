@@ -1,6 +1,5 @@
 # Over simplified parser
-##Athallah Naufal
-### @eavelie
+## @eavelie
 
 #### What is the program for?
 1. This is a pico project for my final assignment of logic programming in first year mechanical engineering.
