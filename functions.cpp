@@ -2,48 +2,48 @@
 #include <iomanip>
 #include <iostream>
 
-std::string inputKelas()
+std::string classNameInput()
 {
-	std::cout << "<<<<<---ATURAN PROGRAM--->>>>>\n"
-			  << "1. Selalu gunakan tanda '/' sebagai pemisah data\n"
-			  << "2. Enter tanpa input apapun akan mengeluarkan anda dari program\n"
-			  << "3. Program hanya akan menghitung dan menampilkan nama-nama siswa yang memiliki nilai\n"
-			  << "4. Program hanya akan menghitung jika anda sudah menginput data dari dua kelas\n\n";
-	std::string inputKelas{};
+	std::cout << "<<<<<---PROGRAM RULES--->>>>>\n"
+			  << "1. Always use the character '/' as a separator between each data\n"
+			  << "2. Enter blank input or the character '/' as the first character to quit the program\n"
+			  << "3. The program will only calculate and output the name of students that have grades inside the grades array\n"
+			  << "4. The program will only work if you have entered data from both classes\n\n";
+	std::string classNameInput{};
 	bool breaker{true};
 	while (breaker == true)
 	{
-		std::cout << "Data dari kelas apa saja yang ingin anda simpan?\n(Minimal dan maksimal adalah dua kelas)\n"
-				  << "(Gunakan tanda '/' sebagai pemisah)\n"
-				  << "Input nama kelas: ";
+		std::cout << "Enter the classes name\n(You MUST enter two class names)\n"
+				  << "(Use the character '/' as a separator each name)\n"
+				  << "Your input: ";
 		int count{0};
-		std::getline(std::cin, inputKelas);
+		std::getline(std::cin, classNameInput);
 		std::cout << '\n';
-		if (inputKelas == "")
+		if (classNameInput == "")
 		{
 			breaker = false;
 		}
 		else
 		{
-			std::string karakter{};
+			std::string character{};
 			int j {0};
 			int i {0};
-			while (i <= inputKelas.length() - 1)
+			while (i <= classNameInput.length() - 1)
 			{
-				karakter = inputKelas[i];
-				if (karakter == "/")
+				character = classNameInput[i];
+				if (character == "/")
 				{
 					j += 1;
 				}
 				i += 1;
 			}
-			if (karakter == "/")
+			if (character == "/")
 			{
 				j -= 1;
 			}
 			if (j > 1 || j < 1)
 			{
-				std::cout << "Anda tidak menginput tepat dua kelas\n\n";
+				std::cout << "You didn't enter two class names!\n\n";
 			}
 			else
 			{
@@ -51,34 +51,34 @@ std::string inputKelas()
 			}
 		}
 	}
-	return inputKelas;
+	return classNameInput;
 }
 
-std::string inputNama(std::string kelas)
+std::string nameInput(std::string className)
 {
-	std::string inputNama{};
-	std::cout << "Ketik nama-nama siswa dari kelas "
-			  << kelas
-			  << " yang ingin anda simpan dan gunakan tanda '/' sebagai pemisah:\n"
-			  << "(Enter tanpa mengetik apapun atau enter '/' di awal untuk keluar)\n"
-			  << "Input nama-nama siswa: ";
-	std::getline(std::cin, inputNama);
+	std::string nameInput{};
+	std::cout << "Enter the name of students from class "
+			  << className
+			  << " Use the character '/' as a separator between each name\n"
+			  << "(Enter blank input or the character '/' as the first character to quit the program)\n"
+			  << "Your input: ";
+	std::getline(std::cin, nameInput);
 	std::cout <<"\n\n";
-	return inputNama;
+	return nameInput;
 			  
 }
 
-std::string inputNilai(std::string kelas)
+std::string gradeInput(std::string className)
 {
-	std::string inputNilai;
-	std::cout << "Ketik nilai-nilai dari siswa-siswa kelas "
-			  << kelas 
-			  << " dan gunakan tanda '/' sebagai pemisah:\n"
-			  << "(Enter tanpa mengetik apapun atau enter '/' di awal untuk keluar)\n"
-			  << "Input nilai-nilai siswa: ";
-	std::getline(std::cin, inputNilai);
+	std::string gradeInput;
+	std::cout << "Enter the grade of students from class "
+			  << className 
+			  << " Use the character '/' as a separator between each name\n"
+			  << "(Enter blank input or the character '/' as the first character to quit the program)\n"
+			  << "Your input: ";
+	std::getline(std::cin, gradeInput);
 	std::cout <<"\n\n";
-	return inputNilai;
+	return gradeInput;
 }
 
 bool boolCheck(std::string input)
@@ -86,112 +86,112 @@ bool boolCheck(std::string input)
 	bool breaker{true};
 	if (input == "")
 	{
-		std::cout << "Anda telah keluar\n";
+		std::cout << "You quit\n";
 		breaker = false;
 	}
 	else if (input[0] == '/')
 	{
-		std::cout << "Anda telah keluar\n";
+		std::cout << "You quit\n";
 		breaker = false;
 	}
 	return breaker;
 }
 
-std::string dataNama(std::string namaSiswa[], int trueSize, std::string kelas)
+std::string namesData(std::string studentsNames[], int namesArrayTrueSize, std::string className)
 {
-	std::string hasil{""};
+	std::string result{""};
 	int i{0};
-	while (i <= trueSize - 1)
+	while (i <= namesArrayTrueSize - 1)
 	{
-		hasil += namaSiswa[i] + ",";
+		result += studentsNames[i] + ",";
 		i += 1;
 	}
-	std::string hasilBaru{""};
-	for (i = 0; i <= hasil.length() - 2; i++)
+	std::string newResult{""};
+	for (i = 0; i <= result.length() - 2; i++)
 	{
-		hasilBaru += hasil[i];
+		newResult += result[i];
 	}
-	hasil = "Data nama kelas " + kelas + ": [" + hasilBaru + "]";
-	return hasil;
+	result = "Students of class " + className + ": [" + newResult + "]";
+	return result;
 }
 
-std::string dataNilai(std::string nilaiSiswa[], int trueSize, int trueSizeNilai, std::string kelas)
+std::string datagrade(std::string studentsGrades[], int namesArrayTrueSize, int gradesArrayTrueSize, std::string className)
 {
-	std::string hasil{""};
+	std::string result{""};
 	int i{0};
-	if (trueSize > trueSizeNilai)
+	if (namesArrayTrueSize > gradesArrayTrueSize)
 	{
-		trueSize = trueSizeNilai;
+		namesArrayTrueSize = gradesArrayTrueSize;
 	}
-	while (i <= trueSize - 1)
+	while (i <= namesArrayTrueSize - 1)
 	{
-		hasil += nilaiSiswa[i] + ",";
+		result += studentsGrades[i] + ",";
 		i += 1;
 	}
-	std::string hasilBaru{""};
-	for (i = 0; i <= hasil.length() - 2; i++)
+	std::string newResult{""};
+	for (i = 0; i <= result.length() - 2; i++)
 	{
-		hasilBaru += hasil[i];
+		newResult += result[i];
 	}
-	hasil = "Data nilai kelas " + kelas + ": [" + hasilBaru + "]";
-	return hasil;
+	result = "Grades of student from class " + className + ": [" + newResult + "]";
+	return result;
 }
 
-std::string namaKelas(std::string kelas, int classChoice)
+std::string classNameFunc(std::string className, int classChoice)
 {
-	std::string namaKelas{};
-	std::string kelasArr[2];
-	std::string karakter{};
+	std::string classNameFunc{};
+	std::string classNameArr[2];
+	std::string character{};
 	int j{0};
 	int i{0};
-	std::string hasil{""};
-	while (i <= kelas.length() - 1)
+	std::string result{""};
+	while (i <= className.length() - 1)
 	{
-		karakter = kelas[i];
-		if (karakter == "/")
+		character = className[i];
+		if (character == "/")
 		{
-			hasil = "";
+			result = "";
 			j += 1;
 		}
 		else
 		{
-			hasil += karakter;
-			kelasArr[j] = hasil;
+			result += character;
+			classNameArr[j] = result;
 		}
 		i += 1;
 	}
 	if (classChoice == 1)
 	{
-		namaKelas = kelasArr[1];
+		classNameFunc = classNameArr[1];
 	}
 	else
 	{
-		namaKelas = kelasArr[0];
+		classNameFunc = classNameArr[0];
 	}
-	return namaKelas;
+	return classNameFunc;
 }
 
-int nilaiTertinggi(std::string nilaiSiswa[], int trueSize, int trueSize1)
+int highestValue(std::string studentsGrades[], int namesArrayTrueSize, int namesArrayTrueSize1)
 {
 	int i{};
-	if (trueSize > trueSize1)
+	if (namesArrayTrueSize > namesArrayTrueSize1)
 	{
-		trueSize = trueSize1;
+		namesArrayTrueSize = namesArrayTrueSize1;
 	}
-	const int trueSizeBaru{trueSize};
-	int inNilaiSiswa[trueSizeBaru];
+	const int namesArrayTrueSizeBaru{namesArrayTrueSize};
+	int newStudentsGrades[namesArrayTrueSizeBaru];
 	int index{0};
-	for (i = 0; i <= trueSize - 1; i++)
+	for (i = 0; i <= namesArrayTrueSize - 1; i++)
 	{
-		inNilaiSiswa[i] = std::stoi(nilaiSiswa[i]);
+		newStudentsGrades[i] = std::stoi(studentsGrades[i]);
 	}
-	int highestValue{inNilaiSiswa[0]};
+	int highestValueInside{newStudentsGrades[0]};
 	i = 1;
-	while (i <= sizeof(inNilaiSiswa)/sizeof(inNilaiSiswa[0]) - 1)
+	while (i <= sizeof(newStudentsGrades)/sizeof(newStudentsGrades[0]) - 1)
 	{
-		if (inNilaiSiswa[i] > highestValue)
+		if (newStudentsGrades[i] > highestValueInside)
 		{
-			highestValue = inNilaiSiswa[i];
+			highestValueInside = newStudentsGrades[i];
 			index = i;
 		}
 		i += i;
@@ -199,27 +199,27 @@ int nilaiTertinggi(std::string nilaiSiswa[], int trueSize, int trueSize1)
 	return index;
 }
 
-int nilaiTerendah(std::string nilaiSiswa[], int trueSize, int trueSize1)
+int lowestValue(std::string studentsGrades[], int namesArrayTrueSize, int namesArrayTrueSize1)
 {
 	int i{};
-	if (trueSize > trueSize1)
+	if (namesArrayTrueSize > namesArrayTrueSize1)
 	{
-		trueSize = trueSize1;
+		namesArrayTrueSize = namesArrayTrueSize1;
 	}
-	const int trueSizeBaru{trueSize};
-	int inNilaiSiswa[trueSizeBaru];
+	const int namesArrayTrueSizeBaru{namesArrayTrueSize};
+	int newStudentsGrades[namesArrayTrueSizeBaru];
 	int index{0};
-	for (i = 0; i <= trueSize - 1; i++)
+	for (i = 0; i <= namesArrayTrueSize - 1; i++)
 	{
-		inNilaiSiswa[i] = std::stoi(nilaiSiswa[i]);
+		newStudentsGrades[i] = std::stoi(studentsGrades[i]);
 	}
-	int lowestValue{inNilaiSiswa[0]};
+	int lowestValueInside{newStudentsGrades[0]};
 	i = 1;
-	while (i <= sizeof(inNilaiSiswa)/sizeof(inNilaiSiswa[0]) - 1)
+	while (i <= sizeof(newStudentsGrades)/sizeof(newStudentsGrades[0]) - 1)
 	{
-		if (inNilaiSiswa[i] < lowestValue)
+		if (newStudentsGrades[i] < lowestValueInside)
 		{
-			lowestValue = inNilaiSiswa[i];
+			lowestValueInside = newStudentsGrades[i];
 			index = i;
 		}
 		i += i;
@@ -227,44 +227,44 @@ int nilaiTerendah(std::string nilaiSiswa[], int trueSize, int trueSize1)
 	return index;
 }
 
-double avrgValue(std::string nilaiSiswa[], int trueSize, int trueSize1)
+double avrgValue(std::string studentsGrades[], int namesArrayTrueSize, int namesArrayTrueSize1)
 {
 	int i{};
-	if (trueSize > trueSize1)
+	if (namesArrayTrueSize > namesArrayTrueSize1)
 	{
-		trueSize = trueSize1;
+		namesArrayTrueSize = namesArrayTrueSize1;
 	}
-	const int trueSizeBaru{trueSize};
-	double inNilaiSiswa[trueSizeBaru];
-	double total{0};
-	for (i = 0; i <= trueSize - 1; i++)
+	const int namesArrayTrueSizeBaru{namesArrayTrueSize};
+	double newStudentsGrades[namesArrayTrueSizeBaru];
+	double mean{0};
+	for (i = 0; i <= namesArrayTrueSize - 1; i++)
 	{
-		inNilaiSiswa[i] = std::stod(nilaiSiswa[i]);
+		newStudentsGrades[i] = std::stod(studentsGrades[i]);
 	}
-	for (i = 0; i <= sizeof(inNilaiSiswa)/sizeof(inNilaiSiswa[0]) - 1; i++)
+	for (i = 0; i <= sizeof(newStudentsGrades)/sizeof(newStudentsGrades[0]) - 1; i++)
 	{
-		total += inNilaiSiswa[i];
+		mean += newStudentsGrades[i];
 	}
-	total /= i;	
-	return total;
+	mean /= i;	
+	return mean;
 }
 
 void parser(std::string arrayString[], std::string input, bool breaker)
 {
-	std::string karakter{}, hasil{""};
+	std::string character{}, result{""};
 	int i{0}, j{0};
 	while (i <= input.length() - 1 && breaker == true)
 	{
-		karakter = input[i];
-		if (karakter == "/")
+		character = input[i];
+		if (character == "/")
 		{
-			hasil = "";
+			result = "";
 			j += 1;
 		}
 		else
 		{
-			hasil += karakter;
-			arrayString[j] = hasil;
+			result += character;
+			arrayString[j] = result;
 		}
 		i += 1;
 	}
@@ -272,174 +272,174 @@ void parser(std::string arrayString[], std::string input, bool breaker)
 
 int arraySize(std::string input, bool breaker)
 {
-	int trueSize{};
-	std::string karakter{};
+	int namesArrayTrueSize{};
+	std::string character{};
 	int i{0}, j{0};
 	while (i <= input.length() - 1 && breaker == true)
 	{
-		karakter = input[i];
-		if (karakter == "/")
+		character = input[i];
+		if (character == "/")
 		{
 			j += 1;
 		}
 		i += 1;
 	}
-	if (karakter == "/")
+	if (character == "/")
 	{
-		trueSize = j;
+		namesArrayTrueSize = j;
 	}
 	else
 	{
-		trueSize = j + 1;
+		namesArrayTrueSize = j + 1;
 	}
-	return trueSize;
+	return namesArrayTrueSize;
 }
 
-void nilaiTertinggiKeseluruhan(std::string nilai[], std::string nama[], std::string nilai1[], std::string nama1[], int trueSize, int trueSizeNilai, int trueSize1, int trueSizeNilai1, std::string kelas)
+void overallHighestValue(std::string grade[], std::string name[], std::string grade1[], std::string name1[], int namesArrayTrueSize, int gradesArrayTrueSize, int namesArrayTrueSize1, int gradesArrayTrueSize1, std::string className)
 {
-	int nilaiTertinggiA{nilaiTertinggi(nilai, trueSize, trueSizeNilai)};
-	int nilaiTertinggiB{nilaiTertinggi(nilai1, trueSize1, trueSizeNilai1)};
-	int nilaiA{std::stoi(nilai[nilaiTertinggiA])};
-	int nilaiB{std::stoi(nilai1[nilaiTertinggiB])};
-	std::string peraihA{nama[nilaiTertinggiA]};
-	std::string peraihB{nama1[nilaiTertinggiB]};
-	std::string kelasA{namaKelas(kelas, 0)};
-	std::string kelasB{namaKelas(kelas, 1)};
-	if (nilaiA > nilaiB)
+	int highestValueA{highestValue(grade, namesArrayTrueSize, gradesArrayTrueSize)};
+	int highestValueB{highestValue(grade1, namesArrayTrueSize1, gradesArrayTrueSize1)};
+	int gradeA{std::stoi(grade[highestValueA])};
+	int gradeB{std::stoi(grade1[highestValueB])};
+	std::string achieverA{name[highestValueA]};
+	std::string achieverB{name1[highestValueB]};
+	std::string classNameA{classNameFunc(className, 0)};
+	std::string classNameB{classNameFunc(className, 1)};
+	if (gradeA > gradeB)
 	{
-		std::cout << "Nilai tertinggi dari kedua kelas adalah "
-				  << nilaiA
-				  << " yang diraih oleh "
-				  << peraihA
-				  << " dari kelas "
-				  << kelasA;
+		std::cout << "The highest grade from the two classes is "
+				  << gradeA
+				  << " and is achieved by "
+				  << achieverA
+				  << " from class "
+				  << classNameA;
 	}
-	else if (nilaiA < nilaiB)
+	else if (gradeA < gradeB)
 	{
-		std::cout << "Nilai tertinggi dari kedua kelas adalah "
-				  << nilaiB
-				  << " yang diraih oleh "
-				  << peraihB
-				  << " dari kelas "
-				  << kelasB;
+		std::cout << "The highest grade from the two classes is "
+				  << gradeB
+				  << " and is achieved by "
+				  << achieverB
+				  << " from class "
+				  << classNameB;
 	}
 	else
 	{
-		std::cout << "Nilai tertinggi dari kedua kelas adalah "
-				  << nilaiA
-				  << " yang diraih oleh "
-				  << peraihA
-				  << " dari kelas "
-				  << kelasA
+		std::cout << "The highest grade from the two classes is "
+				  << gradeA
+				  << " and is achieved by "
+				  << achieverA
+				  << " from class "
+				  << classNameA
 				  << " dan "
-				  << peraihB
-				  << " dari kelas "
-				  << kelasB;
+				  << achieverB
+				  << " from class "
+				  << classNameB;
 	}
 }
 
-void nilaiTerendahKeseluruhan(std::string nilai[], std::string nama[], std::string nilai1[], std::string nama1[], int trueSize, int trueSizeNilai, int trueSize1, int trueSizeNilai1, std::string kelas)
+void lowestValueOverall(std::string grade[], std::string name[], std::string grade1[], std::string name1[], int namesArrayTrueSize, int gradesArrayTrueSize, int namesArrayTrueSize1, int gradesArrayTrueSize1, std::string className)
 {
-	int nilaiTerendahA{nilaiTerendah(nilai, trueSize, trueSizeNilai)};
-	int nilaiTerendahB{nilaiTerendah(nilai1, trueSize1, trueSizeNilai1)};
-	int nilaiA{std::stoi(nilai[nilaiTerendahA])};
-	int nilaiB{std::stoi(nilai1[nilaiTerendahB])};
-	std::string peraihA{nama[nilaiTerendahA]};
-	std::string peraihB{nama1[nilaiTerendahB]};
-	std::string kelasA{namaKelas(kelas, 0)};
-	std::string kelasB{namaKelas(kelas, 1)};
-	if (nilaiA < nilaiB)
+	int lowestValueA{lowestValue(grade, namesArrayTrueSize, gradesArrayTrueSize)};
+	int lowestValueB{lowestValue(grade1, namesArrayTrueSize1, gradesArrayTrueSize1)};
+	int gradeA{std::stoi(grade[lowestValueA])};
+	int gradeB{std::stoi(grade1[lowestValueB])};
+	std::string achieverA{name[lowestValueA]};
+	std::string achieverB{name1[lowestValueB]};
+	std::string classNameA{classNameFunc(className, 0)};
+	std::string classNameB{classNameFunc(className, 1)};
+	if (gradeA < gradeB)
 	{
-		std::cout << "Nilai terendah dari kedua kelas adalah "
-				  << nilaiA
-				  << " yang diraih oleh "
-				  << peraihA
-				  << " dari kelas "
-				  << kelasA;
+		std::cout << "The lowest grade from the two classes is "
+				  << gradeA
+				  << " and is achiveved by "
+				  << achieverA
+				  << " from class "
+				  << classNameA;
 	}
-	else if (nilaiA > nilaiB)
+	else if (gradeA > gradeB)
 	{
-		std::cout << "Nilai terendah dari kedua kelas adalah "
-				  << nilaiB
-				  << " yang diraih oleh "
-				  << peraihB
-				  << " dari kelas "
-				  << kelasB;
+		std::cout << "The lowest grade from the two classes is "
+				  << gradeB
+				  << " and is achiveved by "
+				  << achieverB
+				  << " from class "
+				  << classNameB;
 	}
 	else
 	{
-		std::cout << "Nilai terendah dari kedua kelas adalah "
-				  << nilaiA
-				  << " yang diraih oleh "
-				  << peraihA
-				  << " dari kelas "
-				  << kelasA
+		std::cout << "The lowest grade from the two classes is  "
+				  << gradeA
+				  << " and is achiveved by "
+				  << achieverA
+				  << " from class "
+				  << classNameA
 				  << " dan "
-				  << peraihB
-				  << " dari kelas "
-				  << kelasB;
+				  << achieverB
+				  << " from class "
+				  << classNameB;
 	}
 }
 
 
 
-void peringatan(int trueSize, int trueSize1, int trueSize2, int trueSize3)
+void warningMessage(int namesArrayTrueSize, int namesArrayTrueSize1, int namesArrayTrueSize2, int namesArrayTrueSize3)
 {
-	if (trueSize > trueSize1 || trueSize2 > trueSize3)
+	if (namesArrayTrueSize > namesArrayTrueSize1 || namesArrayTrueSize2 > namesArrayTrueSize3)
 	{
 		std::cout << "<<<<<||>>>>>\n"
-				  << "*PERINGATAN*\n"
-				  << "Terdapat beberapa siswa yang nilainya tidak ada dalam database\n"
-				  << "Jadi, hanya siswa yang memiliki nilai yang akan diperhitungkan dan ditampilkan\n"
+				  << "*Warning*\n"
+				  << "Some students don't have grades stored in the database\n"
+				  << "Only students with grades will be processed\n"
 				  << "<<<<<||>>>>>\n\n";		  
 	}
 	else
 	{
-		std::cout << "[Data nilai sudah lengkap]\n\n";
+		std::cout << "[The grades database is complete]\n\n";
 	}
 }
 
-std::string outputHighestValue(std::string nilaiSiswa[], std::string namaSiswa[], int trueSize, int trueSize1, std::string kelas)
+std::string outputHighestValue(std::string studentsGrades[], std::string studentsNames[], int namesArrayTrueSize, int namesArrayTrueSize1, std::string className)
 {
-	int nilaiTertinggiLocal{nilaiTertinggi(nilaiSiswa, trueSize, trueSize1)};
-	std::string result{"Peraih nilai tertinggi di kelas " + kelas + " adalah " + namaSiswa[nilaiTertinggiLocal] + " dengan nilai sebesar " + nilaiSiswa[nilaiTertinggiLocal]};
+	int highestValueLocal{highestValue(studentsGrades, namesArrayTrueSize, namesArrayTrueSize1)};
+	std::string result{"The student with the highest score in class " + className + " is " + studentsNames[highestValueLocal] + " with a score of " + studentsGrades[highestValueLocal]};
 	return result;	
 }
 
-std::string outputLowestValue(std::string nilaiSiswa[], std::string namaSiswa[], int trueSize, int trueSize1, std::string kelas)
+std::string outputLowestValue(std::string studentsGrades[], std::string studentsNames[], int namesArrayTrueSize, int namesArrayTrueSize1, std::string className)
 {
-	int nilaiTerendahLocal{nilaiTerendah(nilaiSiswa, trueSize, trueSize1)};
-	std::string result{"Peraih nilai terendah di kelas " + kelas + " adalah " + namaSiswa[nilaiTerendahLocal] + " dengan nilai sebesar " + nilaiSiswa[nilaiTerendahLocal]};
+	int localLowestValue{lowestValue(studentsGrades, namesArrayTrueSize, namesArrayTrueSize1)};
+	std::string result{"The student with the lowest score in class " + className + " is " + studentsNames[localLowestValue] + " with a score of " + studentsGrades[localLowestValue]};
 	return result;	
 }
 
-void outputAvrgValue(std::string nilaiSiswa[], std::string kelas, int trueSize, int trueSize1)
+void outputAvrgValue(std::string studentsGrades[], std::string className, int namesArrayTrueSize, int namesArrayTrueSize1)
 {
-	double avrgValueLocal{avrgValue(nilaiSiswa, trueSize, trueSize1)};
-	std::cout << "Rata-rata dari semua nilai di kelas " << kelas << " adalah " << std::fixed << std::setprecision(2) << avrgValueLocal;
+	double avrgValueLocal{avrgValue(studentsGrades, namesArrayTrueSize, namesArrayTrueSize1)};
+	std::cout << "The average value of the scores in class " << className << " is " << std::fixed << std::setprecision(2) << avrgValueLocal;
 }
 
-void allResult(int trueSize, int trueSize1, int trueSizeNilai, int trueSizeNilai1, std::string nama[], std::string nama1[], std::string nilai[], std::string nilai1[], std::string inputKelas)
+void allResult(int namesArrayTrueSize, int namesArrayTrueSize1, int gradesArrayTrueSize, int gradesArrayTrueSize1, std::string name[], std::string name1[], std::string grade[], std::string grade1[], std::string classNameInput)
 {
-	peringatan(trueSize, trueSizeNilai, trueSize1, trueSizeNilai1);
+	warningMessage(namesArrayTrueSize, gradesArrayTrueSize, namesArrayTrueSize1, gradesArrayTrueSize1);
 	std::cout << "==========||==========\n"
-			  << dataNama(nama, trueSize, namaKelas(inputKelas, 0)) << '\n'
-			  << dataNama(nama1, trueSize1, namaKelas(inputKelas, 1)) << '\n'
+			  << namesData(name, namesArrayTrueSize, classNameFunc(classNameInput, 0)) << '\n'
+			  << namesData(name1, namesArrayTrueSize1, classNameFunc(classNameInput, 1)) << '\n'
 			  << "==========||==========\n"
-			  << dataNilai(nilai, trueSize, trueSizeNilai, namaKelas(inputKelas, 0)) << '\n'
-			  << dataNilai(nilai1, trueSize1, trueSizeNilai1, namaKelas(inputKelas, 1)) << '\n'
-			  << outputHighestValue(nilai, nama, trueSize, trueSizeNilai, namaKelas(inputKelas, 0)) << '\n'
-			  << outputHighestValue(nilai1, nama1, trueSize1, trueSizeNilai1, namaKelas(inputKelas, 1)) << '\n'
+			  << datagrade(grade, namesArrayTrueSize, gradesArrayTrueSize, classNameFunc(classNameInput, 0)) << '\n'
+			  << datagrade(grade1, namesArrayTrueSize1, gradesArrayTrueSize1, classNameFunc(classNameInput, 1)) << '\n'
+			  << outputHighestValue(grade, name, namesArrayTrueSize, gradesArrayTrueSize, classNameFunc(classNameInput, 0)) << '\n'
+			  << outputHighestValue(grade1, name1, namesArrayTrueSize1, gradesArrayTrueSize1, classNameFunc(classNameInput, 1)) << '\n'
 			  << "==========||==========\n"
-			  << outputLowestValue(nilai, nama, trueSize, trueSizeNilai, namaKelas(inputKelas, 0)) << '\n'
-			  << outputLowestValue(nilai1, nama1, trueSize1, trueSizeNilai1, namaKelas(inputKelas, 1)) << '\n'
+			  << outputLowestValue(grade, name, namesArrayTrueSize, gradesArrayTrueSize, classNameFunc(classNameInput, 0)) << '\n'
+			  << outputLowestValue(grade1, name1, namesArrayTrueSize1, gradesArrayTrueSize1, classNameFunc(classNameInput, 1)) << '\n'
 			  << "==========||==========\n";
-	outputAvrgValue(nilai, namaKelas(inputKelas, 0), trueSize, trueSizeNilai);
+	outputAvrgValue(grade, classNameFunc(classNameInput, 0), namesArrayTrueSize, gradesArrayTrueSize);
 	std::cout << '\n';
-	outputAvrgValue(nilai1, namaKelas(inputKelas, 1), trueSize1, trueSizeNilai1);
+	outputAvrgValue(grade1, classNameFunc(classNameInput, 1), namesArrayTrueSize1, gradesArrayTrueSize1);
 	std::cout << "\n==========||==========\n";
-	nilaiTertinggiKeseluruhan(nilai, nama, nilai1, nama1, trueSize, trueSizeNilai, trueSize1, trueSizeNilai1, inputKelas);
+	overallHighestValue(grade, name, grade1, name1, namesArrayTrueSize, gradesArrayTrueSize, namesArrayTrueSize1, gradesArrayTrueSize1, classNameInput);
 	std::cout << '\n';
-	nilaiTerendahKeseluruhan(nilai, nama, nilai1, nama1, trueSize, trueSizeNilai, trueSize1, trueSizeNilai1, inputKelas);
+	lowestValueOverall(grade, name, grade1, name1, namesArrayTrueSize, gradesArrayTrueSize, namesArrayTrueSize1, gradesArrayTrueSize1, classNameInput);
 	std::cout << "\n==========||==========\n";
 }
