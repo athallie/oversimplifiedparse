@@ -1,7 +1,9 @@
 #include <string>
+#include <vector>
 #include <iomanip>
 #include <iostream>
 
+///No Problems
 std::string classNameInput()
 {
 	std::cout << "<<<<<---PROGRAM RULES--->>>>>\n"
@@ -53,7 +55,23 @@ std::string classNameInput()
 	}
 	return classNameInput;
 }
-
+//No Problems
+int numbersOfColumn(std::string classInput)
+{
+	int j {0}, i {0};
+	std::string character{};
+	while (i <= classInput.length() - 1)
+	{
+		character = classInput[i];
+		if (character == "/")
+		{
+			j += 1;
+		}
+		i += 1;
+	}
+	return j+1;
+}
+//No Problems
 std::string nameInput(std::string className)
 {
 	std::string nameInput{};
@@ -67,7 +85,7 @@ std::string nameInput(std::string className)
 	return nameInput;
 			  
 }
-
+//No Problems
 std::string gradeInput(std::string className)
 {
 	std::string gradeInput;
@@ -80,7 +98,7 @@ std::string gradeInput(std::string className)
 	std::cout <<"\n\n";
 	return gradeInput;
 }
-
+//No Problems
 bool boolCheck(std::string input)
 {
 	bool breaker{true};
@@ -96,14 +114,14 @@ bool boolCheck(std::string input)
 	}
 	return breaker;
 }
-
-std::string namesData(std::string studentsNames[], int namesArrayTrueSize, std::string className)
+//Untested
+std::string namesData(std::vector<std::vector<std::string>> nameVec, std::string className, int access)
 {
 	std::string result{""};
 	int i{0};
-	while (i <= namesArrayTrueSize - 1)
+	while (i <= nameVec[access].size())
 	{
-		result += studentsNames[i] + ",";
+		result += nameVec[access][i] + ",";
 		i += 1;
 	}
 	std::string newResult{""};
@@ -114,18 +132,18 @@ std::string namesData(std::string studentsNames[], int namesArrayTrueSize, std::
 	result = "Students of class " + className + ": [" + newResult + "]";
 	return result;
 }
-
-std::string datagrade(std::string studentsGrades[], int namesArrayTrueSize, int gradesArrayTrueSize, std::string className)
+//Untested
+std::string gradesData(std::vector<std::vector<std::string>> nameVec, std::vector<std::vector<std::string>> gradeVec, std::string className, int access)
 {
 	std::string result{""};
 	int i{0};
-	if (namesArrayTrueSize > gradesArrayTrueSize)
+	if (gradeVec[access].size() > nameVec[access].size())
 	{
-		namesArrayTrueSize = gradesArrayTrueSize;
+		gradeVec[access].resize(nameVec[access].size());
 	}
-	while (i <= namesArrayTrueSize - 1)
+	while (i <= gradeVec.size())
 	{
-		result += studentsGrades[i] + ",";
+		result += gradeVec[access][i] + ",";
 		i += 1;
 	}
 	std::string newResult{""};
@@ -136,7 +154,7 @@ std::string datagrade(std::string studentsGrades[], int namesArrayTrueSize, int 
 	result = "Grades of student from class " + className + ": [" + newResult + "]";
 	return result;
 }
-
+//Untested
 std::string classNameFunc(std::string className, int classChoice)
 {
 	std::string classNameFunc{};
@@ -170,20 +188,15 @@ std::string classNameFunc(std::string className, int classChoice)
 	}
 	return classNameFunc;
 }
-
-int highestValue(std::string studentsGrades[], int namesArrayTrueSize, int namesArrayTrueSize1)
+//Untested
+int highestValue(std::vector<std::vector<std::string>> gradeVec, int access)
 {
-	int i{};
-	if (namesArrayTrueSize > namesArrayTrueSize1)
-	{
-		namesArrayTrueSize = namesArrayTrueSize1;
-	}
-	const int namesArrayTrueSizeBaru{namesArrayTrueSize};
-	int newStudentsGrades[namesArrayTrueSizeBaru];
+	int newStudentsGrades[gradeVec[access].size()];
 	int index{0};
-	for (i = 0; i <= namesArrayTrueSize - 1; i++)
+	int i{};
+	for (i = 0; i <= gradeVec[access].size(); i++)
 	{
-		newStudentsGrades[i] = std::stoi(studentsGrades[i]);
+		newStudentsGrades[i] = std::stoi(gradeVec[access][i]);
 	}
 	int highestValueInside{newStudentsGrades[0]};
 	i = 1;
@@ -198,20 +211,15 @@ int highestValue(std::string studentsGrades[], int namesArrayTrueSize, int names
 	}
 	return index;
 }
-
-int lowestValue(std::string studentsGrades[], int namesArrayTrueSize, int namesArrayTrueSize1)
+//Untested
+int lowestValue(std::vector<std::vector<std::string>> gradeVec, int access)
 {
-	int i{};
-	if (namesArrayTrueSize > namesArrayTrueSize1)
-	{
-		namesArrayTrueSize = namesArrayTrueSize1;
-	}
-	const int namesArrayTrueSizeBaru{namesArrayTrueSize};
-	int newStudentsGrades[namesArrayTrueSizeBaru];
+	int newStudentsGrades[gradeVec[access].size()];
 	int index{0};
-	for (i = 0; i <= namesArrayTrueSize - 1; i++)
+	int i{};
+	for (i = 0; i <= gradeVec[access].size(); i++)
 	{
-		newStudentsGrades[i] = std::stoi(studentsGrades[i]);
+		newStudentsGrades[i] = std::stoi(gradeVec[access][i]);
 	}
 	int lowestValueInside{newStudentsGrades[0]};
 	i = 1;
@@ -226,20 +234,15 @@ int lowestValue(std::string studentsGrades[], int namesArrayTrueSize, int namesA
 	}
 	return index;
 }
-
-double avrgValue(std::string studentsGrades[], int namesArrayTrueSize, int namesArrayTrueSize1)
+//Untested
+double avrgValue(std::vector<std::vector<std::string>> gradeVec, int access)
 {
-	int i{};
-	if (namesArrayTrueSize > namesArrayTrueSize1)
-	{
-		namesArrayTrueSize = namesArrayTrueSize1;
-	}
-	const int namesArrayTrueSizeBaru{namesArrayTrueSize};
-	double newStudentsGrades[namesArrayTrueSizeBaru];
+	double newStudentsGrades[gradeVec[access].size()];
 	double mean{0};
-	for (i = 0; i <= namesArrayTrueSize - 1; i++)
+	int i{};
+	for (i = 0; i <= gradeVec[access].size(); i++)
 	{
-		newStudentsGrades[i] = std::stod(studentsGrades[i]);
+		newStudentsGrades[i] = std::stod(gradeVec[access][i]);
 	}
 	for (i = 0; i <= sizeof(newStudentsGrades)/sizeof(newStudentsGrades[0]) - 1; i++)
 	{
@@ -248,56 +251,33 @@ double avrgValue(std::string studentsGrades[], int namesArrayTrueSize, int names
 	mean /= i;	
 	return mean;
 }
-
-void parser(std::string arrayString[], std::string input, bool breaker)
+//No Problems
+void parser(std::vector<std::vector<std::string>>& vec, std::string input, int access)
 {
 	std::string character{}, result{""};
-	int i{0}, j{0};
-	while (i <= input.length() - 1 && breaker == true)
+	int i{};
+	for (i = 0; i <= input.length() - 1; i++)
 	{
 		character = input[i];
 		if (character == "/")
 		{
+			vec[access].push_back(result);		
 			result = "";
-			j += 1;
 		}
 		else
 		{
 			result += character;
-			arrayString[j] = result;
 		}
-		i += 1;
-	}
-}
-
-int arraySize(std::string input, bool breaker)
-{
-	int namesArrayTrueSize{};
-	std::string character{};
-	int i{0}, j{0};
-	while (i <= input.length() - 1 && breaker == true)
-	{
-		character = input[i];
-		if (character == "/")
+		if (i == input.length() - 1)
 		{
-			j += 1;
+			vec[access].push_back(result);		
 		}
-		i += 1;
 	}
-	if (character == "/")
-	{
-		namesArrayTrueSize = j;
-	}
-	else
-	{
-		namesArrayTrueSize = j + 1;
-	}
-	return namesArrayTrueSize;
 }
-
-void overallHighestValue(std::string grade[], std::string name[], std::string grade1[], std::string name1[], int namesArrayTrueSize, int gradesArrayTrueSize, int namesArrayTrueSize1, int gradesArrayTrueSize1, std::string className)
+//Lots of Problem
+/* void overallHighestValue(std::vector<std::vector<std::string>> nameVec, std::vector<std::vector<std::string>> gradeVec, std::string className)
 {
-	int highestValueA{highestValue(grade, namesArrayTrueSize, gradesArrayTrueSize)};
+	int highestValueA{highestValue()};
 	int highestValueB{highestValue(grade1, namesArrayTrueSize1, gradesArrayTrueSize1)};
 	int gradeA{std::stoi(grade[highestValueA])};
 	int gradeB{std::stoi(grade1[highestValueB])};
@@ -336,9 +316,9 @@ void overallHighestValue(std::string grade[], std::string name[], std::string gr
 				  << " from class "
 				  << classNameB;
 	}
-}
+} */
 
-void lowestValueOverall(std::string grade[], std::string name[], std::string grade1[], std::string name1[], int namesArrayTrueSize, int gradesArrayTrueSize, int namesArrayTrueSize1, int gradesArrayTrueSize1, std::string className)
+/* void lowestValueOverall(std::string grade[], std::string name[], std::string grade1[], std::string name1[], int namesArrayTrueSize, int gradesArrayTrueSize, int namesArrayTrueSize1, int gradesArrayTrueSize1, std::string className)
 {
 	int lowestValueA{lowestValue(grade, namesArrayTrueSize, gradesArrayTrueSize)};
 	int lowestValueB{lowestValue(grade1, namesArrayTrueSize1, gradesArrayTrueSize1)};
@@ -379,11 +359,11 @@ void lowestValueOverall(std::string grade[], std::string name[], std::string gra
 				  << " from class "
 				  << classNameB;
 	}
-}
+} */
 
 
 
-void warningMessage(int namesArrayTrueSize, int namesArrayTrueSize1, int namesArrayTrueSize2, int namesArrayTrueSize3)
+/* void warningMessage(std::vector<std::vector<std::string>> nameVec, std::vector<std::vector<std::string>> gradeVec, int access)
 {
 	if (namesArrayTrueSize > namesArrayTrueSize1 || namesArrayTrueSize2 > namesArrayTrueSize3)
 	{
@@ -397,9 +377,9 @@ void warningMessage(int namesArrayTrueSize, int namesArrayTrueSize1, int namesAr
 	{
 		std::cout << "[The grades database is complete]\n\n";
 	}
-}
+} */
 
-std::string outputHighestValue(std::string studentsGrades[], std::string studentsNames[], int namesArrayTrueSize, int namesArrayTrueSize1, std::string className)
+/* std::string outputHighestValue(std::string className)
 {
 	int highestValueLocal{highestValue(studentsGrades, namesArrayTrueSize, namesArrayTrueSize1)};
 	std::string result{"The student with the highest score in class " + className + " is " + studentsNames[highestValueLocal] + " with a score of " + studentsGrades[highestValueLocal]};
@@ -413,13 +393,13 @@ std::string outputLowestValue(std::string studentsGrades[], std::string students
 	return result;	
 }
 
-void outputAvrgValue(std::string studentsGrades[], std::string className, int namesArrayTrueSize, int namesArrayTrueSize1)
+void outputAvrgValue(std::string className)
 {
 	double avrgValueLocal{avrgValue(studentsGrades, namesArrayTrueSize, namesArrayTrueSize1)};
 	std::cout << "The average value of the scores in class " << className << " is " << std::fixed << std::setprecision(2) << avrgValueLocal;
 }
-
-void allResult(int namesArrayTrueSize, int namesArrayTrueSize1, int gradesArrayTrueSize, int gradesArrayTrueSize1, std::string name[], std::string name1[], std::string grade[], std::string grade1[], std::string classNameInput)
+ */
+/* void allResult(std::string classNameInput)
 {
 	warningMessage(namesArrayTrueSize, gradesArrayTrueSize, namesArrayTrueSize1, gradesArrayTrueSize1);
 	std::cout << "==========||==========\n"
@@ -443,3 +423,4 @@ void allResult(int namesArrayTrueSize, int namesArrayTrueSize1, int gradesArrayT
 	lowestValueOverall(grade, name, grade1, name1, namesArrayTrueSize, gradesArrayTrueSize, namesArrayTrueSize1, gradesArrayTrueSize1, classNameInput);
 	std::cout << "\n==========||==========\n";
 }
+ */

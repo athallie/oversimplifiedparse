@@ -1,56 +1,64 @@
 #include "functions.h"
 #include <string>
+#include <vector>
 #include <iostream>
 
 int main()
 {
-	std::cout << "<<<TUGAS AKHIR>>>\n"
-			  << "oleh Athallah Naufal - 21525094\n\n";
+	std::cout << "<<<Parser>>>\n\n";
+	
+	std::string character{}, inputForNames{}, inputForGrades{};
 	std::string inputClassGlobal{classNameInput()};
+	
 	bool breaker{boolCheck(inputClassGlobal)};
-	std::string nameInput0{}, gradeInput0{}, nameInput1{}, gradeInput1{}, result{}, character{}, name[100], grade[100], name1[100], grade1[100];
-	int i{}, j{}, count{}, namesArrayTrueSize{}, namesArrayTrueSize1{}, gradesArrayTrueSize{}, gradesArrayTrueSize1{};
-	if (breaker == true)
-	{
-		nameInput0 = nameInput(classNameFunc(inputClassGlobal, 0));
-		breaker = boolCheck(nameInput0);
-		if (breaker == true)
+	
+	int i{}, j{}, count{}, otherCount{}, totalColumn{};
+	totalColumn = numbersOfColumn(inputClassGlobal);
+	
+	
+	//La
+	std::vector<std::vector<std::string>> nameRow(totalColumn);
+	std::vector<std::vector<std::string>> gradeRow(totalColumn);
+	
+	while (breaker == true)
+	{	
+		for (count = 0; count < totalColumn; count++)
 		{
-			gradeInput0 = gradeInput(classNameFunc(inputClassGlobal, 0));
-			breaker = boolCheck(gradeInput0);
 			if (breaker == true)
 			{
-				nameInput1 = nameInput(classNameFunc(inputClassGlobal, 1));
-				breaker = boolCheck(nameInput1);
-				if (breaker == true)
-				{
-					gradeInput1 = gradeInput(classNameFunc(inputClassGlobal, 1));
-					breaker = boolCheck(gradeInput1);
-					j = 0;
-					i = 0;
-					result = "";
-					for (count = 0; count <= 1; count++)
-					{
-						if (count == 0)
-						{
-							parser(name, nameInput0, breaker);
-							namesArrayTrueSize = arraySize(nameInput0, breaker);
-							parser(grade, gradeInput0, breaker);
-							gradesArrayTrueSize = arraySize(gradeInput0, breaker);
-						}
-						else
-						{
-							parser(name1, nameInput1, breaker);
-							namesArrayTrueSize1 = arraySize(nameInput1, breaker);
-							parser(grade1, gradeInput1 ,breaker);
-							gradesArrayTrueSize1 = arraySize(gradeInput1, breaker);
-						}
-					}
-					allResult(namesArrayTrueSize, namesArrayTrueSize1, gradesArrayTrueSize, gradesArrayTrueSize1, name, name1, grade, grade1, inputClassGlobal);
-				}	
+				inputForNames = nameInput(classNameFunc(inputClassGlobal, count));
+				breaker = boolCheck(inputForNames);	
+			}
+			if (breaker == true)
+			{
+				inputForGrades = gradeInput(classNameFunc(inputClassGlobal, count));
+				breaker = boolCheck(inputForGrades);
+			}
+			if (breaker == true)
+			{
+				j = 0;
+				i = 0;
+				
+				parser(nameRow, inputForNames, count);
+				parser(gradeRow, inputForGrades, count);				
 			}
 		}
+		breaker = false;
 	}
-	std::cout << "\nProgram has ended\n";
+	for (count = 0; count < nameRow.size(); count++)
+	{
+		for (otherCount = 0; otherCount < nameRow[count].size(); otherCount++)
+		{
+			std::cout << "\nValue of nameRow [" << count << "][" << otherCount << "]: " << nameRow[count][otherCount];
+		}
+	}
+	
+	for(count = 0; count < gradeRow.size(); count++)
+	{
+		for (otherCount = 0; otherCount < gradeRow[count].size(); otherCount++)
+		{
+			std::cout << "\nValue of gradeRow [" << count << "][" << otherCount << "]: " << gradeRow[count][otherCount];
+		}
+	}
 	return 0;
 }
