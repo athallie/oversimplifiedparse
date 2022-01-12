@@ -1,6 +1,5 @@
 #include <string>
 #include <vector>
-#include <iomanip>
 #include <iostream>
 
 ///No Problems
@@ -13,15 +12,15 @@ std::string classNameInput()
 			  << "4. The program will only work if you have entered data from both classes\n\n";
 	std::string classNameInput{};
 	bool breaker{true};
-	while (breaker == true)
-	{
+/* 	while (breaker == true)
+	{ */
 		std::cout << "Enter the classes name\n(You MUST enter two class names)\n"
 				  << "(Use the character '/' as a separator each name)\n"
 				  << "Your input: ";
 		int count{0};
 		std::getline(std::cin, classNameInput);
 		std::cout << '\n';
-		if (classNameInput == "")
+		/* if (classNameInput == "" || classNameInput == "/")
 		{
 			breaker = false;
 		}
@@ -51,8 +50,8 @@ std::string classNameInput()
 			{
 				breaker = false;
 			}
-		}
-	}
+		} */
+	//}
 	return classNameInput;
 }
 //No Problems
@@ -85,7 +84,7 @@ std::string nameInput(std::string className)
 	return nameInput;
 			  
 }
-//No Problems
+//Need to be modified --> Force user to input integer -- Use ASCII code to check the input
 std::string gradeInput(std::string className)
 {
 	std::string gradeInput;
@@ -114,139 +113,80 @@ bool boolCheck(std::string input)
 	}
 	return breaker;
 }
-//Untested
-std::string namesData(std::vector<std::vector<std::string>> nameVec, std::string className, int access)
+
+//No Problem
+std::string classNameFunc(std::string className, int classChoice, int howMany)
 {
-	std::string result{""};
-	int i{0};
-	while (i <= nameVec[access].size())
-	{
-		result += nameVec[access][i] + ",";
-		i += 1;
-	}
-	std::string newResult{""};
-	for (i = 0; i <= result.length() - 2; i++)
-	{
-		newResult += result[i];
-	}
-	result = "Students of class " + className + ": [" + newResult + "]";
-	return result;
-}
-//Untested
-std::string gradesData(std::vector<std::vector<std::string>> nameVec, std::vector<std::vector<std::string>> gradeVec, std::string className, int access)
-{
-	std::string result{""};
-	int i{0};
-	if (gradeVec[access].size() > nameVec[access].size())
-	{
-		gradeVec[access].resize(nameVec[access].size());
-	}
-	while (i <= gradeVec.size())
-	{
-		result += gradeVec[access][i] + ",";
-		i += 1;
-	}
-	std::string newResult{""};
-	for (i = 0; i <= result.length() - 2; i++)
-	{
-		newResult += result[i];
-	}
-	result = "Grades of student from class " + className + ": [" + newResult + "]";
-	return result;
-}
-//Untested
-std::string classNameFunc(std::string className, int classChoice)
-{
-	std::string classNameFunc{};
-	std::string classNameArr[2];
-	std::string character{};
-	int j{0};
-	int i{0};
+	std::string classNameFunc{}, character{};
+	std::string classNameArr[howMany];
+	int i{0}, j{0};
 	std::string result{""};
 	while (i <= className.length() - 1)
 	{
 		character = className[i];
 		if (character == "/")
 		{
+			classNameArr[j] = result;
 			result = "";
 			j += 1;
 		}
 		else
 		{
 			result += character;
+		}
+		if (i == className.length() - 1)
+		{
 			classNameArr[j] = result;
 		}
 		i += 1;
 	}
-	if (classChoice == 1)
-	{
-		classNameFunc = classNameArr[1];
-	}
-	else
-	{
-		classNameFunc = classNameArr[0];
-	}
+	classNameFunc = classNameArr[classChoice];
 	return classNameFunc;
 }
-//Untested
-int highestValue(std::vector<std::vector<std::string>> gradeVec, int access)
+//No Problems
+int highestValue(std::vector<std::vector<std::string>>& gradeVec, int access)
 {
-	int newStudentsGrades[gradeVec[access].size()];
 	int index{0};
 	int i{};
-	for (i = 0; i <= gradeVec[access].size(); i++)
-	{
-		newStudentsGrades[i] = std::stoi(gradeVec[access][i]);
-	}
-	int highestValueInside{newStudentsGrades[0]};
+	int highestValueInside{std::stoi(gradeVec[access][0])};
 	i = 1;
-	while (i <= sizeof(newStudentsGrades)/sizeof(newStudentsGrades[0]) - 1)
+	while (i <= gradeVec[access].size() - 1)
 	{
-		if (newStudentsGrades[i] > highestValueInside)
+		if (std::stoi(gradeVec[access][i]) > highestValueInside)
 		{
-			highestValueInside = newStudentsGrades[i];
+			highestValueInside = std::stoi(gradeVec[access][i]);
 			index = i;
 		}
 		i += i;
 	}
 	return index;
 }
-//Untested
-int lowestValue(std::vector<std::vector<std::string>> gradeVec, int access)
+//No Problems
+int lowestValue(std::vector<std::vector<std::string>>& gradeVec, int access)
 {
-	int newStudentsGrades[gradeVec[access].size()];
 	int index{0};
 	int i{};
-	for (i = 0; i <= gradeVec[access].size(); i++)
-	{
-		newStudentsGrades[i] = std::stoi(gradeVec[access][i]);
-	}
-	int lowestValueInside{newStudentsGrades[0]};
+	int lowestValueInside{std::stoi(gradeVec[access][0])};
 	i = 1;
-	while (i <= sizeof(newStudentsGrades)/sizeof(newStudentsGrades[0]) - 1)
+	while (i <= gradeVec[access].size() - 1)
 	{
-		if (newStudentsGrades[i] < lowestValueInside)
+		if (std::stoi(gradeVec[access][i]) < lowestValueInside)
 		{
-			lowestValueInside = newStudentsGrades[i];
+			lowestValueInside = std::stoi(gradeVec[access][i]);
 			index = i;
 		}
 		i += i;
 	}
 	return index;
 }
-//Untested
-double avrgValue(std::vector<std::vector<std::string>> gradeVec, int access)
+//No Problems
+double avrgValue(std::vector<std::vector<std::string>>& gradeVec, int access)
 {
-	double newStudentsGrades[gradeVec[access].size()];
 	double mean{0};
 	int i{};
-	for (i = 0; i <= gradeVec[access].size(); i++)
+	for (i = 0; i <= gradeVec[access].size() - 1; i++)
 	{
-		newStudentsGrades[i] = std::stod(gradeVec[access][i]);
-	}
-	for (i = 0; i <= sizeof(newStudentsGrades)/sizeof(newStudentsGrades[0]) - 1; i++)
-	{
-		mean += newStudentsGrades[i];
+		mean += std::stoi(gradeVec[access][i]);
 	}
 	mean /= i;	
 	return mean;
