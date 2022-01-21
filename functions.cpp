@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <cctype>
 #include <iostream>
 
 ///No Problems
@@ -8,8 +9,7 @@ std::string classNameInput()
 	std::cout << "<<<<<---PROGRAM RULES--->>>>>\n"
 			  << "1. Always use the character '/' as a separator between each data\n"
 			  << "2. Enter blank input or the character '/' as the first character to quit the program\n"
-			  << "3. The program will only calculate and output the name of students that have grades inside the grades array\n"
-			  << "4. The program will only work if you have entered data from both classes\n\n";
+			  << "3. The program will only calculate and output the name of students that have grades inside the grades array\n";
 	std::string classNameInput{};
 	bool breaker{true};
 /* 	while (breaker == true)
@@ -62,7 +62,7 @@ int numbersOfColumn(std::string classInput)
 	while (i <= classInput.length() - 1)
 	{
 		character = classInput[i];
-		if (character == "/")
+		if (character == "/" && (classInput[i+1] != '\0'))
 		{
 			j += 1;
 		}
@@ -87,14 +87,44 @@ std::string nameInput(std::string className)
 //Need to be modified --> Force user to input integer -- Use ASCII code to check the input
 std::string gradeInput(std::string className)
 {
-	std::string gradeInput;
-	std::cout << "Enter the grade of students from class "
-			  << className 
-			  << " Use the character '/' as a separator between each name\n"
-			  << "(Enter blank input or the character '/' as the first character to quit the program)\n"
-			  << "Your input: ";
-	std::getline(std::cin, gradeInput);
-	std::cout <<"\n\n";
+	bool breaker{true};
+	std::string gradeInput{};
+	char character{};
+	while (breaker == true)
+	{
+		std::cout << "Enter the grade of students from class "
+				  << className 
+				  << " Use the character '/' as a separator between each name\n"
+				  << "(Enter blank input or the character '/' as the first character to quit the program)\n"
+				  << "Your input: ";
+		std::getline(std::cin, gradeInput);
+		std::cout <<"\n\n";
+		
+		for (int i = 0; i <= gradeInput.length() - 1; i++)
+		{
+			character = gradeInput[i];
+			
+			if (i == 0 && character == '/')
+			{
+				std::cout << "Wrong Input\n\n";
+				break;
+			}
+			if (character != '/' && not(std::isdigit(character)))
+			{
+				std::cout << "Wrong Input\n\n";
+				break;
+			}
+			if (character == '/' && gradeInput[i+1] == '/')
+			{
+				std::cout << "Wrong Input\n\n";
+				break;
+			}
+			if (i == gradeInput.length() - 1 && std::isdigit(character) || i == gradeInput.length() - 2 && std::isdigit(character))
+			{
+				breaker = false;
+			}
+		}	
+	}
 	return gradeInput;
 }
 //No Problems
@@ -199,17 +229,18 @@ void parser(std::vector<std::vector<std::string>>& vec, std::string input, int a
 	for (i = 0; i <= input.length() - 1; i++)
 	{
 		character = input[i];
-		if (character == "/")
+		if (character == "/" && (input[i+1] != '\0'))
 		{
 			vec[access].push_back(result);		
 			result = "";
 		}
-		else
+		else if (input[i+1] != '\0')
 		{
 			result += character;
 		}
 		if (i == input.length() - 1)
 		{
+			result += character;
 			vec[access].push_back(result);		
 		}
 	}

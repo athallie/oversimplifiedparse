@@ -27,7 +27,7 @@ int main()
 		//Store the index of x value from each class
 		int indexHighestValue[totalColumn];
 		int indexLowestValue[totalColumn];
-		int meanValue[totalColumn];
+		double meanValue[totalColumn];
 
 		//Main program - Iterate x times based on the totalColumn's value
 		for (count = 0; count < totalColumn; count++)
@@ -56,9 +56,9 @@ int main()
 			
 			if (breaker == true)
 			{
-				//Parse the names and grades -> Store them into the reserve vectors
+				//Parse the names and grades -> Store them into the reserved vectors
 				parser(nameRow, inputForNames, count);
-				parser(gradeRow, inputForGrades, count);	
+				parser(gradeRow, inputForGrades, count);
 
 				//Populate the arrays with index values of each
 				indexHighestValue[count] = highestValue(gradeRow, count);
